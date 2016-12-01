@@ -5,26 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieCatalog"
         mc:Ignorable="d"
-        Title="MainWindow" Height="660.856" Width="1298.684">
-    <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,-7,0">
+        Title="MainWindow" Height="350" Width="500">
+    <Grid RenderTransformOrigin="0,0" Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="617*"/>
-            <ColumnDefinition Width="287*"/>
+            <ColumnDefinition Width="296*"/>
         </Grid.ColumnDefinitions>
         <Grid.RenderTransform>
             <TransformGroup>
                 <ScaleTransform/>
                 <SkewTransform/>
-                <RotateTransform Angle="0.644"/>
+                <RotateTransform Angle="0"/>
                 <TranslateTransform/>
             </TransformGroup>
         </Grid.RenderTransform>
-        <Button x:Name="Exit" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="1" Margin="258,547,0,0"/>
-        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="1" Margin="258,422,0,0"/>
-        <Button x:Name="Export" Content="Export" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="190,553,0,0"/>
-        <Button x:Name="Import" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="85,553,0,0"/>
-        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="1" Margin="40,422,0,0"/>
-        <Button x:Name="Edit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="1" Margin="156,422,0,0"/>
 
+        <Button x:Name="Exit" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="414,281,0,0" Height="20" Click="Exit_Click"/>
+        
+        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="414,226,0,0" Height="20"/>
+        
+        <Button x:Name="Export" Content="Export" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,281,0,0" Height="20"/>
+        
+        <Button x:Name="Import" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,281,0,0" Height="20"/>
+        
+        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="254,226,0,0" Height="20"/>
+        
+        <Button x:Name="Edit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="334,226,0,0" Height="20"/>
+        
+        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="135,13,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
+        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="20" Margin="10,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
+        <StackPanel Name="Display" Margin="10,51,10,98">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Name "/>
+                <TextBox Margin="0,5,0,0"
+                           Text="{Binding Name, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock ><Run Text="Genre"/></TextBlock>
+                <TextBox Margin="0,5,0,0"
+                           Text="{Binding Genre, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Director"/>
+                <TextBox Margin="0,5,0,0"
+                           Text="{Binding Director, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Release Date"/>
+                <TextBox Margin="0,5,0,0"
+                           Text="{Binding ReleaseDate, Mode=TwoWay}"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

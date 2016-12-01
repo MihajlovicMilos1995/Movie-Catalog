@@ -23,6 +23,12 @@ namespace MovieCatalog
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = MovieDataStoring.GetMovieData();
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
