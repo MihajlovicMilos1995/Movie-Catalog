@@ -28,7 +28,11 @@ namespace MovieCatalog
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            var result = MessageBox.Show("Are you sure you want to exit?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }
