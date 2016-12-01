@@ -10,10 +10,46 @@ namespace MovieCatalog
 {
     public class MovieDataStoring : INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public string Genre { get; set; }
-        public string Director { get; set; }
-        public string ReleaseDate { get; set; }
+        private string _Name;
+        public string Name
+        {
+           get { return _Name; }
+            set
+            {
+                _Name = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _Genre;
+        public string Genre
+        {
+            get { return _Genre; }
+            set
+            {
+                _Genre = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _Director;
+        public string Director
+        {
+            get { return _Director; }
+            set
+            {
+                _Director = value;
+                OnPropertyChanged();                    
+            }
+        }
+        private string _ReleaseDate;
+        public string ReleaseDate
+        {
+            get { return _ReleaseDate; }
+            set
+            {
+                _ReleaseDate = value;
+                OnPropertyChanged();
+            }
+        }
 
         public static MovieDataStoring GetMovieData()
         {

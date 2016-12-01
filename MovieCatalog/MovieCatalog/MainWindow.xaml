@@ -27,34 +27,13 @@
         
         <Button x:Name="Import" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,281,0,0" Height="20"/>
         
-        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="254,226,0,0" Height="20"/>
+        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="254,226,0,0" Height="20" Click="Add_Click"/>
         
         <Button x:Name="Edit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="334,226,0,0" Height="20"/>
         
         <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="135,13,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
         <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="20" Margin="10,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
-        <StackPanel Name="Display" Margin="10,51,10,98">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Name "/>
-                <TextBox Margin="0,5,0,0"
-                           Text="{Binding Name, Mode=TwoWay}" />
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock ><Run Text="Genre"/></TextBlock>
-                <TextBox Margin="0,5,0,0"
-                           Text="{Binding Genre, Mode=TwoWay}" />
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Director"/>
-                <TextBox Margin="0,5,0,0"
-                           Text="{Binding Director, Mode=TwoWay}"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Release Date"/>
-                <TextBox Margin="0,5,0,0"
-                           Text="{Binding ReleaseDate, Mode=TwoWay}"/>
-            </StackPanel>
-        </StackPanel>
+   
     </Grid>
 </Window>
