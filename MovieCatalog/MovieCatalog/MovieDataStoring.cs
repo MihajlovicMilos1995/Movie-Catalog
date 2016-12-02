@@ -53,7 +53,7 @@ namespace MovieCatalog
 
         public static MovieDataStoring GetMovieData()
         {
-            var Film = new MovieDataStoring()
+            List<string> list1 = new List<string>(new string[] { "Film1", "Film2", "Film3", "Film4" });
             {
                 Name = "Avatar",
                 Genre = "Action",

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieCatalog"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="500">
+        Title="MainWindow" Height="350" Width="525">
     <Grid RenderTransformOrigin="0,0" Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="296*"/>
@@ -27,7 +27,7 @@
         
         <Button x:Name="Import" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,281,0,0" Height="20"/>
         
-        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="254,226,0,0" Height="20" Click="Add_Click"/>
+        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="254,226,0,0" Height="20"/>
         
         <Button x:Name="Edit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="334,226,0,0" Height="20"/>
         
