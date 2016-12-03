@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace MovieCatalog
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -45,26 +42,26 @@ namespace MovieCatalog
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             AddWindow win2 = new AddWindow();
-            win2.Show();           
+            win2.Show();
         }
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {
 
-            Microsoft.Win32.OpenFileDialog ExplorerOpen = new Microsoft.Win32.OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
 
-            ExplorerOpen.DefaultExt = ".xml";
-            ExplorerOpen.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
+            Import.DefaultExt = ".xml";
+            Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
 
-            Nullable<bool> result = ExplorerOpen.ShowDialog();
+            Nullable<bool> result = Import.ShowDialog();
         }
 
         private void Export_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog SaveFile = new Microsoft.Win32.SaveFileDialog();
-            SaveFile.FileName = "Document"; // Default file name
+            SaveFile.FileName = "Movies";
             SaveFile.DefaultExt = ".xml"; // Default file extension
-            SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter files by extension
+            SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter by extension
 
             // Show save file dialog box
             Nullable<bool> result = SaveFile.ShowDialog();
@@ -72,7 +69,7 @@ namespace MovieCatalog
             // Process save file dialog box results
             if (result == true)
             {
-                // Save document
+                // Save
                 string filename = SaveFile.FileName;
             }
         }

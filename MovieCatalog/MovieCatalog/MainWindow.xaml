@@ -33,7 +33,7 @@
 
         <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="135,13,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="Search_Click"/>
         <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="20" Margin="10,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <DataGrid Name="dataGrid" Margin="10,38,10,98" />
+        <DataGrid Name="dataGrid" Margin="10,38,10,98" IsReadOnly="True"  />
 
     </Grid>
 </Window>
