@@ -15,20 +15,19 @@ using System.Windows.Shapes;
 namespace MovieCatalog
 {
     /// <summary>
-    /// Interaction logic for AddWindow.xaml
+    /// Interaction logic for Edit.xaml
     /// </summary>
-    public partial class AddWindow : Window
+    public partial class Edit : Window
     {
-        public AddWindow()
+        public Edit()
         {
             InitializeComponent();
         }
 
-        private void buttonCancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
         public List<Genre> Genres
         {
             get

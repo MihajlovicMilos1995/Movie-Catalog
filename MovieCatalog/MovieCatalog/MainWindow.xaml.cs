@@ -73,5 +73,20 @@ namespace MovieCatalog
                 string filename = SaveFile.FileName;
             }
         }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            Edit win = new Edit();
+            win.Show();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Close();
+            }
+        }
     }
 }
