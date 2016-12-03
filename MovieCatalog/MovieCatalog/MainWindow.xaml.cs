@@ -50,7 +50,31 @@ namespace MovieCatalog
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"c:\Desktop\");
+
+            Microsoft.Win32.OpenFileDialog ExplorerOpen = new Microsoft.Win32.OpenFileDialog();
+
+            ExplorerOpen.DefaultExt = ".xml";
+            ExplorerOpen.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
+
+            Nullable<bool> result = ExplorerOpen.ShowDialog();
+        }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog SaveFile = new Microsoft.Win32.SaveFileDialog();
+            SaveFile.FileName = "Document"; // Default file name
+            SaveFile.DefaultExt = ".xml"; // Default file extension
+            SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter files by extension
+
+            // Show save file dialog box
+            Nullable<bool> result = SaveFile.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                string filename = SaveFile.FileName;
+            }
         }
     }
 }
