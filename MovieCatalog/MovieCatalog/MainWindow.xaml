@@ -25,7 +25,7 @@
 
         <Button x:Name="Export" Content="Export" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,281,0,0" Height="20"/>
 
-        <Button x:Name="Import" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,281,0,0" Height="20"/>
+        <Button x:Name="Import" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,281,0,0" Height="20" Click="Import_Click"/>
 
         <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="254,226,0,0" Height="20" Click="Add_Click"/>
 

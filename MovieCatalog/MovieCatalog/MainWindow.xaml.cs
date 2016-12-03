@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,11 @@ namespace MovieCatalog
         {
             AddWindow win2 = new AddWindow();
             win2.Show();           
+        }
+
+        private void Import_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(@"c:\Desktop\");
         }
     }
 }
