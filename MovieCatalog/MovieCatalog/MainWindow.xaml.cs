@@ -23,7 +23,7 @@ namespace MovieCatalog
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = MovieDataStoring.GetMovieData();
+            dataGrid.ItemsSource = MovieDataStoring.getMovies();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -33,6 +33,18 @@ namespace MovieCatalog
             {
                 Application.Current.Shutdown();
             }
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            //Iskoristi SearchBox.Text() da bi dobio vrednost search-a. Zatim treba da prodjes kroz listu filmova (odnosno, njihovih imena ili zanra).
+            //SearchBox.Text();
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddWindow win2 = new AddWindow();
+            win2.Show();           
         }
     }
 }

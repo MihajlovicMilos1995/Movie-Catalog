@@ -5,9 +5,19 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace MovieCatalog
 {
+    public enum Genre
+    {
+        Action,
+        Thriller,
+        Scifi,
+        Fantasy,
+        Western 
+    }
+
     public class MovieDataStoring : INotifyPropertyChanged
     {
         private string _Name;
@@ -18,10 +28,11 @@ namespace MovieCatalog
             {
                 _Name = value;
                 OnPropertyChanged();
+                
             }
         }
-        private string _Genre;
-        public string Genre
+        private Genre _Genre;
+        public Genre Genre
         {
             get { return _Genre; }
             set
@@ -51,17 +62,16 @@ namespace MovieCatalog
             }
         }
 
-        public static MovieDataStoring GetMovieData()
+        public static List<MovieDataStoring> getMovies()
         {
-            var Film = new MovieDataStoring()
-            {
-                Name = "Avatar",
-                Genre = "Action",
-                Director = "James Cameron",
-                ReleaseDate = "18/12/2009 12:00:00"
-            };
-            return Film;
+            var movie = new List<MovieDataStoring>();
+            movie.Add(new MovieDataStoring() { Name = "Avatar", Genre = Genre.Action, Director = "James Cameron", ReleaseDate = ""});
+            movie.Add(new MovieDataStoring() { Name = "Dark Knight", Genre = Genre.Action, Director = "Christopher Nolan" });
+            movie.Add(new MovieDataStoring() { Name = "Gilmors girls", Genre = Genre.Action, Director = "Ivan Peric" });
+            movie.Add(new MovieDataStoring() { Name = "The Hatefull Eight", Genre = Genre.Action, Director = "Quentin Tarntino" });
+            return movie;
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string caller = "")
         {
@@ -70,5 +80,6 @@ namespace MovieCatalog
                 PropertyChanged(this, new PropertyChangedEventArgs(caller));
             }
         }
+        
     }
 }
