@@ -19,6 +19,8 @@ namespace MovieCatalog
     /// </summary>
     public partial class AddWindow : Window
     {
+        public string add;
+        public MovieDataStoring movie;
         public AddWindow()
         {
             InitializeComponent();
@@ -36,5 +38,11 @@ namespace MovieCatalog
                 return Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList<Genre>();
             }
         }
+
+        private void buttonOK_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        //Na Ok treba inicijalizovati movie sa vrednostima sa forme
     }
 }

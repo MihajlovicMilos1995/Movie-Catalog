@@ -18,6 +18,7 @@ namespace MovieCatalog
 {
     public partial class MainWindow : Window
     {
+        public List<MovieDataStoring> movies;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +44,7 @@ namespace MovieCatalog
         {
             AddWindow win2 = new AddWindow();
             win2.Show();
+            //movies.Add(win2.movie);
         }
 
         private void Import_Click(object sender, RoutedEventArgs e)
