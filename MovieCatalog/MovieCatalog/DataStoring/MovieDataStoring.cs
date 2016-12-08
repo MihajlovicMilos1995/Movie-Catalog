@@ -11,11 +11,11 @@ namespace MovieCatalog
 {
     public enum Genre
     {
-        Action,
-        Thriller,
-        Scifi,
-        Fantasy,
-        Western 
+        Action = 1,
+        Thriller = 2,
+        Scifi = 3,
+        Fantasy = 4,
+        Western = 5 
     }
 
     public class MovieDataStoring : INotifyPropertyChanged

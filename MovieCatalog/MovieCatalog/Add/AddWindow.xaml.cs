@@ -41,7 +41,10 @@ namespace MovieCatalog
 
         private void buttonOK_Click(object sender, RoutedEventArgs e)
         {
-            
+            string addName = textBox.Text;
+            //int addGenre = (int)Genre.;
+            string addDirector = textBox1.Text;
+            movie = new MovieDataStoring();
         }
         //Na Ok treba inicijalizovati movie sa vrednostima sa forme
     }
