@@ -19,32 +19,55 @@ namespace MovieCatalog
     /// </summary>
     public partial class AddWindow : Window
     {
+        public DateTime? date;
         public string add;
-        public MovieDataStoring movie;
+        public Movies movie { get; set; }
         public AddWindow()
         {
             InitializeComponent();
         }
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // ... Get DatePicker reference.
+            var picker = sender as DatePicker;
 
+            // ... Get nullable DateTime from SelectedDate.
+            date = picker.SelectedDate;
+            if (!date.HasValue)
+            {
+                // ... A null object.
+                this.Title = "No date";
+            }
+            else
+            {
+                // ... No need to display the time.
+                this.Title = date.Value.ToShortDateString();
+            }
+        }
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        public List<Genre> Genres
+        public List<MovieTypeEnum> Genres
         {
             get
             {
-                return Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList<Genre>();
+                return Enum.GetValues(typeof(MovieTypeEnum)).Cast<MovieTypeEnum>().ToList<MovieTypeEnum>();
             }
         }
 
         private void buttonOK_Click(object sender, RoutedEventArgs e)
         {
-            string addName = textBox.Text;
-            //int addGenre = (int)Genre.;
-            string addDirector = textBox1.Text;
-            movie = new MovieDataStoring();
+            movie = new Movies();
+
+            movie.Name = nameBox.Text;
+            movie.Director = directorBox.Text;
+            movie.Genre = (MovieTypeEnum)comboBox.SelectedItem;
+
+            movie.ReleaseDate = date.Value;
+            this.DialogResult = true;
+            this.Close();
         }
         //Na Ok treba inicijalizovati movie sa vrednostima sa forme
     }

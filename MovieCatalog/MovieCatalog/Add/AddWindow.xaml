@@ -9,8 +9,8 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <!--DataContext ces trebati da promenis kad budes radio MVVM pattern-->
     <Grid>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="122,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="122,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="23" Margin="122,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="directorBox" HorizontalAlignment="Left" Height="23" Margin="122,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="32,27,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="23" Width="54"/>
         <ComboBox x:Name="comboBox" ItemsSource="{Binding Genres}" HorizontalAlignment="Left" Margin="122,55,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.442,0.195"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="32,55,0,0" TextWrapping="Wrap" Text="Genre:" VerticalAlignment="Top" Height="22" Width="54"/>

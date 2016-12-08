@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,13 @@ namespace MovieCatalog
 {
     public partial class MainWindow : Window
     {
-        public List<MovieDataStoring> movies;
+        public ObservableCollection<Movies> movies = new ObservableCollection<Movies>();
         public MainWindow()
         {
+            movies = Movies.getMovies();
+
             InitializeComponent();
-            dataGrid.ItemsSource = MovieDataStoring.getMovies();
+            dataGrid.ItemsSource = movies;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -39,14 +42,6 @@ namespace MovieCatalog
             //Iskoristi SearchBox.Text() da bi dobio vrednost search-a. Zatim treba da prodjes kroz listu filmova (odnosno, njihovih imena ili zanra).
             //SearchBox.Text();
         }
-
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            AddWindow win2 = new AddWindow();
-            win2.Show();
-            //movies.Add(win2.movie);
-        }
-
         private void Import_Click(object sender, RoutedEventArgs e)
         {
 
@@ -88,6 +83,17 @@ namespace MovieCatalog
             if (result == MessageBoxResult.Yes)
             {
                 Close();
+            }
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddWindow addDialog = new AddWindow();
+
+            if (addDialog.ShowDialog() == true)
+            {
+                movies.Add(addDialog.movie);
+                dataGrid.Items.Refresh();
             }
         }
     }

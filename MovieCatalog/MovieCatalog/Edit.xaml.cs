@@ -28,12 +28,6 @@ namespace MovieCatalog
         {
             Close();
         }
-        public List<Genre> Genres
-        {
-            get
-            {
-                return Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList<Genre>();
-            }
-        }
+        
     }
 }
