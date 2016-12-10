@@ -34,7 +34,13 @@
 
         <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="Search_Click" Grid.Column="1"/>
         <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="126" Grid.ColumnSpan="2"/>
-        <DataGrid Name="dataGrid" Margin="10,10,14,10" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="5" />
-
+        <DataGrid x:Name="dataGrid" Margin="10,10,14,10" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding Movies}" AutoGenerateColumns="False" CanUserReorderColumns="False" ColumnWidth="*">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Genre" Binding="{Binding Genre}"/>
+                <DataGridTextColumn Header="Director" Binding="{Binding Director}"/>
+                <DataGridTextColumn Header="Release date" Binding="{Binding ReleaseDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

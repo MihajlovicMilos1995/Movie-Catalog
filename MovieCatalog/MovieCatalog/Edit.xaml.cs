@@ -23,6 +23,33 @@ namespace MovieCatalog
         {
             InitializeComponent();
         }
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // ... Get DatePicker reference.
+            var picker = sender as DatePicker;
+
+            DateTime? date = picker.SelectedDate;
+            // ... Get nullable DateTime from SelectedDate.
+            date = picker.SelectedDate;
+            if (!date.HasValue)
+            {
+                // ... A null object.
+                this.Title = "No date";
+            }
+            else
+            {
+                // ... No need to display the time.
+                this.Title = date.Value.ToShortDateString();
+            }
+        }
+        public List<MovieTypeEnum> Genres
+        {
+            get
+            {
+                return Enum.GetValues(typeof(MovieTypeEnum)).Cast<MovieTypeEnum>().ToList<MovieTypeEnum>();
+            }
+        }
+
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {

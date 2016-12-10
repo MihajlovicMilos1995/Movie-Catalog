@@ -13,11 +13,11 @@
         <TextBlock x:Name="textBlockName" HorizontalAlignment="Left" Height="23" Margin="10,21,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlockGenre" HorizontalAlignment="Left" Height="23" Margin="10,55,0,0" TextWrapping="Wrap" Text="Genre" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlockDirector" HorizontalAlignment="Left" Height="23" Margin="10,89,0,0" TextWrapping="Wrap" Text="Director" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="71"/>
-        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="112,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="112,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
         <TextBlock x:Name="textBlockRelease" HorizontalAlignment="Left" Height="23" Margin="10,160,0,0" TextWrapping="Wrap" Text="Release Date" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="23" Margin="112,55,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Genres}"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="23" Margin="112,55,0,0" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="textBoxDirector" HorizontalAlignment="Left" Height="23" Margin="112,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <DatePicker HorizontalAlignment="Left" Margin="112,160,0,0" VerticalAlignment="Top" Height="21" Width="120"/>
+        <DatePicker x:Name="editDate" HorizontalAlignment="Left" Margin="112,160,0,0" VerticalAlignment="Top" Height="21" Width="120"/>
 
     </Grid>
 </Window>

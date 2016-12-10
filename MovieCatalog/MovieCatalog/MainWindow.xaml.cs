@@ -19,13 +19,28 @@ namespace MovieCatalog
 {
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Movies> movies = new ObservableCollection<Movies>();
+        private ObservableCollection<Movies> movies = new ObservableCollection<Movies>();
+
+        public ObservableCollection<Movies> Movies
+        {
+            get
+            {
+                return movies;
+            }
+
+            set
+            {
+                movies = value;
+            }
+        }
+
         public MainWindow()
         {
-            movies = Movies.getMovies();
+            Movies = MovieCatalog.Movies.getMovies();
 
             InitializeComponent();
-            dataGrid.ItemsSource = movies;
+            DataContext = this;
+            //dataGrid.ItemsSource = Movies;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -86,7 +101,7 @@ namespace MovieCatalog
                 var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {                    
-                    movies.Remove((Movies)dataGrid.SelectedItem);
+                    Movies.Remove((Movies)dataGrid.SelectedItem);
                 }
             }
 
@@ -98,7 +113,7 @@ namespace MovieCatalog
 
             if (addDialog.ShowDialog() == true)
             {
-                movies.Add(addDialog.movie);
+                Movies.Add(addDialog.movie);
                 dataGrid.Items.Refresh();
             }
         }
