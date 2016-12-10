@@ -60,11 +60,8 @@ namespace MovieCatalog
             SaveFile.DefaultExt = ".xml"; // Default file extension
             SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter by extension
 
-            // Show save file dialog box
-            Nullable<bool> result = SaveFile.ShowDialog();
-
             // Process save file dialog box results
-            if (result == true)
+            if (SaveFile.ShowDialog() == true)
             {
                 // Save
                 string filename = SaveFile.FileName;
@@ -79,11 +76,20 @@ namespace MovieCatalog
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
+            if
+            (dataGrid.SelectedItem == null)
             {
-                Close();
+                MessageBox.Show("Nothing is selected", "Error", MessageBoxButton.OK);
             }
+            else
+            {
+                var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {                    
+                    movies.Remove((Movies)dataGrid.SelectedItem);
+                }
+            }
+
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)

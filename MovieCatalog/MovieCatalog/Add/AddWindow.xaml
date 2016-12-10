@@ -13,10 +13,10 @@
         <TextBox x:Name="directorBox" HorizontalAlignment="Left" Height="23" Margin="122,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="32,27,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="23" Width="54"/>
         <ComboBox x:Name="comboBox" ItemsSource="{Binding Genres}" HorizontalAlignment="Left" Margin="122,55,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.442,0.195"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="32,55,0,0" TextWrapping="Wrap" Text="Genre:" VerticalAlignment="Top" Height="22" Width="54"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="32,55,0,0" TextWrapping="Wrap" Text="Genre:" VerticalAlignment="Top" Height="23" Width="54"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="32,82,0,0" TextWrapping="Wrap" Text="Director" VerticalAlignment="Top" RenderTransformOrigin="-0.113,-0.204" Height="23" Width="54"/>
-        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,146,0,0" TextWrapping="Wrap" Text="Select release date:" VerticalAlignment="Top" Height="22" Width="107"/>
-        <DatePicker HorizontalAlignment="Left" Margin="122,146,0,0" VerticalAlignment="Top" Height="22" Width="120"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,146,0,0" TextWrapping="Wrap" Text="Select release date:" VerticalAlignment="Top" Height="23" Width="107"/>
+        <DatePicker x:Name="datePicker" HorizontalAlignment="Left" Margin="122,146,0,0" VerticalAlignment="Top" Height="23" Width="120"/>
         <Button x:Name="buttonOK" Content="Ok" HorizontalAlignment="Left" Margin="87,226,0,0" VerticalAlignment="Top" Width="75" Click="buttonOK_Click"/>
         <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="167,226,0,0" VerticalAlignment="Top" Width="75" Click="buttonCancel_Click"/>
 

@@ -20,7 +20,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="Exit" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,25,0,0" Height="20" Click="Exit_Click" Grid.Column="4" Grid.Row="3"/>
+        <Button x:Name="Exit" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,25,0,0" Height="20" Click="Exit_Click" Grid.Column="4" Grid.Row="3"  />
 
         <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="0,0,0,0" Height="20" Click="Delete_Click" Grid.Column="4" Grid.Row="2"/>
 
@@ -34,7 +34,7 @@
 
         <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="Search_Click" Grid.Column="1"/>
         <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="126" Grid.ColumnSpan="2"/>
-        <DataGrid Name="dataGrid" Margin="10,10,14,10" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="5"  />
+        <DataGrid Name="dataGrid" Margin="10,10,14,10" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="5" />
 
     </Grid>
 </Window>

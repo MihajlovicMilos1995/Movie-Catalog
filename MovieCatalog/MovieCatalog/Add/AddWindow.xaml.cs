@@ -25,12 +25,14 @@ namespace MovieCatalog
         public AddWindow()
         {
             InitializeComponent();
+           
         }
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             // ... Get DatePicker reference.
             var picker = sender as DatePicker;
 
+            DateTime? date = picker.SelectedDate;
             // ... Get nullable DateTime from SelectedDate.
             date = picker.SelectedDate;
             if (!date.HasValue)
@@ -63,9 +65,9 @@ namespace MovieCatalog
 
             movie.Name = nameBox.Text;
             movie.Director = directorBox.Text;
-            movie.Genre = (MovieTypeEnum)comboBox.SelectedItem;
+            movie.Genre = (MovieTypeEnum)comboBox.SelectedItem;        
+            movie.ReleaseDate = datePicker.SelectedDate.Value;
 
-            movie.ReleaseDate = date.Value;
             this.DialogResult = true;
             this.Close();
         }
