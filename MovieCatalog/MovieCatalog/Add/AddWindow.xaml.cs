@@ -21,7 +21,7 @@ namespace MovieCatalog
     {
         public DateTime? date;
         public string add;
-        public Movies movie { get; set; }
+        public Movie movie { get; set; }
         public AddWindow()
         {
             InitializeComponent();
@@ -61,7 +61,7 @@ namespace MovieCatalog
 
         private void buttonOK_Click(object sender, RoutedEventArgs e)
         {
-            movie = new Movies();
+            movie = new Movie();
 
             movie.Name = nameBox.Text;
             movie.Director = directorBox.Text;

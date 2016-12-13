@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,14 +15,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace MovieCatalog
 {
     public partial class MainWindow : Window
     {
-        private ObservableCollection<Movies> movies = new ObservableCollection<Movies>();
 
-        public ObservableCollection<Movies> Movies
+        private ObservableCollection<Movie> movies = new ObservableCollection<Movie>();
+
+        public ObservableCollection<Movie> Movies
         {
             get
             {
@@ -36,7 +39,7 @@ namespace MovieCatalog
 
         public MainWindow()
         {
-            Movies = MovieCatalog.Movies.getMovies();
+            Movies = MovieCatalog.Movie.getMovies();
 
             InitializeComponent();
             DataContext = this;
@@ -85,8 +88,22 @@ namespace MovieCatalog
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            Edit win = new Edit();
-            win.Show();
+            //Edit win = new Edit();
+            //win.Show();
+            if (dataGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Nothing is selected", "Error!", MessageBoxButton.OK);
+            }
+            else
+            {
+                var selectedMovie = (Movie)dataGrid.SelectedItem;
+                var editDialog = new Edit(selectedMovie);
+
+
+                if (editDialog.ShowDialog() == true)
+                {
+                }
+            }
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -100,8 +117,8 @@ namespace MovieCatalog
             {
                 var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
-                {                    
-                    Movies.Remove((Movies)dataGrid.SelectedItem);
+                {
+                    Movies.Remove((Movie)dataGrid.SelectedItem);
                 }
             }
 
