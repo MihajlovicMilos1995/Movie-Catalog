@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieCatalog.Add;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,11 @@ namespace MovieCatalog
     {
         public DateTime? date;
         public string add;
-        public Movie movie { get; set; }
+        public Movie Movie { get; set; }
         public AddWindow()
         {
             InitializeComponent();
-           
+
         }
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -46,10 +47,6 @@ namespace MovieCatalog
                 this.Title = date.Value.ToShortDateString();
             }
         }
-        private void buttonCancel_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
 
         public List<MovieTypeEnum> Genres
         {
@@ -58,19 +55,5 @@ namespace MovieCatalog
                 return Enum.GetValues(typeof(MovieTypeEnum)).Cast<MovieTypeEnum>().ToList<MovieTypeEnum>();
             }
         }
-
-        private void buttonOK_Click(object sender, RoutedEventArgs e)
-        {
-            movie = new Movie();
-
-            movie.Name = nameBox.Text;
-            movie.Director = directorBox.Text;
-            movie.Genre = (MovieTypeEnum)comboBox.SelectedItem;        
-            movie.ReleaseDate = datePicker.SelectedDate.Value;
-
-            this.DialogResult = true;
-            this.Close();
-        }
-        //Na Ok treba inicijalizovati movie sa vrednostima sa forme
     }
 }
