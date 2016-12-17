@@ -2,8 +2,10 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace MovieCatalog
 {
@@ -36,6 +38,7 @@ namespace MovieCatalog
         }
 
         // Exit funkcija
+
         public void Exit()
         {
 
@@ -47,6 +50,7 @@ namespace MovieCatalog
         }
 
         //Import funkcija
+
         public void Import()
         {
             Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
@@ -54,10 +58,20 @@ namespace MovieCatalog
             Import.DefaultExt = ".xml";
             Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
 
-            Nullable<bool> result = Import.ShowDialog();
+            if (Import.ShowDialog() == true)
+            {
+                XmlSerializer x = new XmlSerializer(typeof(Movie));
+                Movie noviFilm;
+
+                using (StreamReader reader = new StreamReader(Import.FileName))
+                {
+                    noviFilm = (Movie)x.Deserialize(reader);
+                }
+            }
         }
 
         //Export funkcija
+
         public void Export()
         {
 
@@ -67,19 +81,38 @@ namespace MovieCatalog
             SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter by extension
 
             // Process save file dialog box results
+
             if (SaveFile.ShowDialog() == true)
             {
                 // Save
+
                 string filename = SaveFile.FileName;
+
+                // Serializer
+
+                Movie film = new Movie();
+                film.Name = "Avatar";
+                film.Genre = MovieTypeEnum.Fantasy;
+
+                XmlSerializer x = new XmlSerializer(film.GetType());
+
+                using (StreamWriter writer = new StreamWriter(filename))
+                {
+                    x.Serialize(writer, film);
+                }
+
             }
 
         }
 
         // Edit funkcija
+
         public void Edit()
         {
             //Edit win = new Edit();
+
             //win.Show();
+
             if (selectedMovie == null)
             {
                 MessageBox.Show("Nothing is selected", "Error!", MessageBoxButton.OK);
@@ -97,6 +130,7 @@ namespace MovieCatalog
         }
 
         // Add funkcija
+
         public void Add()
         {
             AddWindow addDialog = new AddWindow();
@@ -108,6 +142,7 @@ namespace MovieCatalog
         }
 
         // Delete funkcija
+
         public void Delete()
         {
             if
@@ -126,6 +161,7 @@ namespace MovieCatalog
         }
 
         // Search funkcija
+
         public void Search()
         {
             OnPropertyChanged("Movies");
@@ -164,6 +200,7 @@ namespace MovieCatalog
                         }
                     }
                     return filteredMovies;
+
                     //dataGrid.ItemsSource = filteredMovies;
                 }
             }
