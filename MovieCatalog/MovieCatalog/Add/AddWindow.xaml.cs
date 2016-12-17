@@ -1,17 +1,9 @@
-﻿using MovieCatalog.Add;
+﻿using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MovieCatalog
 {
@@ -20,32 +12,33 @@ namespace MovieCatalog
     /// </summary>
     public partial class AddWindow : Window
     {
-        public DateTime? date;
-        public string add;
-        public Movie Movie { get; set; }
+        public Movie AddMovie { get; set; }
+        public ICommand OkCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+
         public AddWindow()
         {
+            OkCommand = new DelegateCommand(Ok);
+            CancelCommand = new DelegateCommand(Cancel);
+
+            AddMovie = new Movie();
+
             InitializeComponent();
 
         }
-        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // ... Get DatePicker reference.
-            var picker = sender as DatePicker;
 
-            DateTime? date = picker.SelectedDate;
-            // ... Get nullable DateTime from SelectedDate.
-            date = picker.SelectedDate;
-            if (!date.HasValue)
-            {
-                // ... A null object.
-                this.Title = "No date";
-            }
-            else
-            {
-                // ... No need to display the time.
-                this.Title = date.Value.ToShortDateString();
-            }
+        //Ok funkcija
+        public void Ok()
+        {
+
+            this.DialogResult = true;
+            this.Close();
+        }
+
+        //Cancel funkcija
+        public void Cancel()
+        {
+            this.Close();
         }
 
         public List<MovieTypeEnum> Genres
