@@ -55,21 +55,30 @@ namespace MovieCatalog
         public void Import()
         {
             Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
-            Import.FileName = "";
-            Import.DefaultExt = ".xml";
             Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
 
             if (Import.ShowDialog() == true)
             {
-                //string impext = Path.GetExtension();
-                XmlSerializer x = new XmlSerializer(typeof(ObservableCollection<Movie>));
-                object noviFilm;
+                string impext = Path.GetExtension(Import.FileName);
 
-                using (StreamReader reader = new StreamReader(Import.FileName))
+                if (impext.Equals(".xml"))
                 {
-                    noviFilm = x.Deserialize(reader);                 
+                    XmlSerializer x = new XmlSerializer(typeof(ObservableCollection<Movie>));
+
+                    using (StreamReader reader = new StreamReader(Import.FileName))
+                    {
+                        Movies = (ObservableCollection<Movie>)x.Deserialize(reader);
+
+                    }
+                }
+                else if (impext.Equals(".json"))
+                {                   
+                    string jsonimp = File.ReadAllText(Import.FileName);
+                    ObservableCollection<Movie> data = JsonConvert.DeserializeObject<ObservableCollection<Movie>>(jsonimp);
+                    Movies = data;
                 }
             }
+
         }
 
         //Export funkcija
