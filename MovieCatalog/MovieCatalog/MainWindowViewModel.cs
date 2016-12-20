@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace MovieCatalog
 {
@@ -54,18 +55,19 @@ namespace MovieCatalog
         public void Import()
         {
             Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
-
+            Import.FileName = "";
             Import.DefaultExt = ".xml";
             Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
 
             if (Import.ShowDialog() == true)
             {
-                XmlSerializer x = new XmlSerializer(typeof(Movie));
-                Movie noviFilm;
+                //string impext = Path.GetExtension();
+                XmlSerializer x = new XmlSerializer(typeof(ObservableCollection<Movie>));
+                object noviFilm;
 
                 using (StreamReader reader = new StreamReader(Import.FileName))
                 {
-                    noviFilm = (Movie)x.Deserialize(reader);
+                    noviFilm = x.Deserialize(reader);                 
                 }
             }
         }
@@ -88,21 +90,28 @@ namespace MovieCatalog
 
                 string filename = SaveFile.FileName;
 
+                // izvlacenje extenzije (ubaci u if else)
+
+                string ext = Path.GetExtension(filename);
+
                 // Serializer
-
-                Movie film = new Movie();
-                film.Name = "Avatar";
-                film.Genre = MovieTypeEnum.Fantasy;
-
-                XmlSerializer x = new XmlSerializer(film.GetType());
-
-                using (StreamWriter writer = new StreamWriter(filename))
+                if (ext.Equals(".xml"))
                 {
-                    x.Serialize(writer, film);
+
+                    XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Movie>));
+
+                    using (FileStream writer = new FileStream(filename, FileMode.OpenOrCreate))
+                    {
+                        serializer.Serialize(writer, movies);
+                    }
                 }
+                else if (ext == ".json")
+                {
+                    string json = JsonConvert.SerializeObject(movies, Formatting.Indented);
 
+                    File.WriteAllText(filename, json);
+                }
             }
-
         }
 
         // Edit funkcija

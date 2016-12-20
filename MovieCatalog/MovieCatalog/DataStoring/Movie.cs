@@ -14,7 +14,7 @@ namespace MovieCatalog
         Fantasy = 4,
         Western = 5
     }
-
+    [Serializable]
     public class Movie : INotifyPropertyChanged
     {
         public Movie()
@@ -33,6 +33,7 @@ namespace MovieCatalog
             this.Genre = movie.Genre;
             this.ReleaseDate = movie.ReleaseDate;
         }
+        
         private string _Name;
         public string Name
         {
