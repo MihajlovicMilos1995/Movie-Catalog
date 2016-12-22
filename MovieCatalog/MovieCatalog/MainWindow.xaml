@@ -5,39 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieCatalog"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid RenderTransformOrigin="0,0" Margin="0,0,0,0">
+        Title="MainWindow">
+    <Grid>
+
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="Exit" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,25,0,0" Height="20" Command="{Binding ExitCommand}" Grid.Column="4" Grid.Row="3"  />
 
-        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" Height="20" Command="{Binding DeleteCommand}" Grid.Column="4" Grid.Row="2"/>
+        <Button x:Name="Exit" Content="Exit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Command="{Binding ExitCommand}" Grid.Column="5" Grid.Row="3" Width="70" Height="20"/>
 
-        <Button x:Name="Export" Content="Export" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="19,23,0,0" Height="20" Command="{Binding ExportCommand}" Grid.Column="1" Grid.Row="3"/>
+        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10" Command="{Binding DeleteCommand}" Grid.Column="5" Grid.Row="2" Width="70" Height="20"/>
 
-        <Button x:Name="Import" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="18,23,0,0" Height="20" Command="{Binding ImportCommand}" Grid.Row="3"/>
+        <Button x:Name="Export" Content="Export" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" Command="{Binding ExportCommand}" Grid.Column="1" Grid.Row="3" Width="70" Height="20"/>
 
-        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" Height="20" Grid.Column="2" Grid.Row="2" Command="{Binding AddCommand}"/>
+        <Button x:Name="Import" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" Command="{Binding ImportCommand}" Grid.Row="3" Width="70" Height="20"/>
 
-        <Button x:Name="Edit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" Height="20" Command="{Binding EditCommand}" Grid.Column="3" Grid.Row="2"/>
+        <Button x:Name="Add" Content="Add" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="70" Height="20" Margin="0,0,10,10" Grid.Column="3" Grid.Row="2" Command="{Binding AddCommand}"/>
 
-        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="64" Height="20" Command="{Binding SearchCommand}" Grid.Column="1"/>
+        <Button x:Name="Edit" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="70" Height="20" Margin="10,0,10,10" Command="{Binding EditCommand}" Grid.Column="4" Grid.Row="2"/>
 
-        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" Text="{Binding SearchValue}"/>
-        
-        <DataGrid x:Name="dataGrid" Margin="10,10,14,10" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding Movies}" AutoGenerateColumns="False" CanUserReorderColumns="False" ColumnWidth="*" SelectedItem="{Binding SelectedMovie}">
-            
+        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="70" Height="20" Command="{Binding SearchCommand}" Grid.Column="2"/>
+
+        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Grid.ColumnSpan="2" Text="{Binding SearchValue}"/>
+
+        <DataGrid x:Name="dataGrid" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="7" ItemsSource="{Binding Movies}" AutoGenerateColumns="False" CanUserReorderColumns="False" ColumnWidth="*" SelectedItem="{Binding SelectedMovie}">
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Genre" Binding="{Binding Genre}"/>

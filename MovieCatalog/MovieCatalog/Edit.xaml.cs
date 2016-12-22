@@ -32,7 +32,7 @@ namespace MovieCatalog
         {
             DataContext = this;
             _oldMovie = movie;
-            Movie = movie;
+            Movie = new Movie(movie);
             InitializeComponent();
         }
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)

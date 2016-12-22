@@ -127,10 +127,6 @@ namespace MovieCatalog
 
         public void Edit()
         {
-            //Edit win = new Edit();
-
-            //win.Show();
-
             if (selectedMovie == null)
             {
                 MessageBox.Show("Nothing is selected", "Error!", MessageBoxButton.OK);
@@ -139,7 +135,6 @@ namespace MovieCatalog
             {
                 var selectedMovie = this.selectedMovie;
                 var editDialog = new Edit(selectedMovie);
-
 
                 if (editDialog.ShowDialog() == true)
                 {
