@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieCatalog"
         mc:Ignorable="d"
-        Title="MainWindow">
+        Title="MainWindow" Height="350" Width="600">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -40,7 +40,7 @@
 
         <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Grid.ColumnSpan="2" Text="{Binding SearchValue}"/>
 
-        <DataGrid x:Name="dataGrid" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="7" ItemsSource="{Binding Movies}" AutoGenerateColumns="False" CanUserReorderColumns="False" ColumnWidth="*" SelectedItem="{Binding SelectedMovie}">
+        <DataGrid x:Name="dataGrid" IsReadOnly="True" Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="7" ItemsSource="{Binding Movies}" AutoGenerateColumns="False" CanUserReorderColumns="False" ColumnWidth="*" SelectedItem="{Binding SelectedMovie}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>

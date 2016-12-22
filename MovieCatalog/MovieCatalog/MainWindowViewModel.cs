@@ -35,7 +35,6 @@ namespace MovieCatalog
             ExitCommand = new DelegateCommand(Exit);
             ExportCommand = new DelegateCommand(Export);
             ImportCommand = new DelegateCommand(Import);
-            movies = MovieCatalog.Movie.getMovies();
         }
 
         // Exit funkcija

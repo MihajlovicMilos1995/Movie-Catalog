@@ -2,17 +2,17 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
 
 namespace MovieCatalog
 {
     public enum MovieTypeEnum
     {
-        Action = 1,
-        Thriller = 2,
-        Scifi = 3,
-        Fantasy = 4,
-        Western = 5
+        Unknown,
+        Action,
+        Thriller,
+        Scifi,
+        Fantasy,
+        Western 
     }
     [Serializable]
     public class Movie : INotifyPropertyChanged
