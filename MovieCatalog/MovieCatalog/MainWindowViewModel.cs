@@ -1,5 +1,4 @@
 ﻿using Prism.Commands;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -7,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using System;
 
 namespace MovieCatalog
 {
@@ -28,7 +28,7 @@ namespace MovieCatalog
 
         public MainWindowViewModel()
         {
-            SearchCommand = new DelegateCommand(Search);
+            SearchCommand = new DelegateCommand<string>(Search);
             DeleteCommand = new DelegateCommand(Delete);
             AddCommand = new DelegateCommand(Add);
             EditCommand = new DelegateCommand(Edit);
@@ -42,7 +42,7 @@ namespace MovieCatalog
         public void Exit()
         {
 
-            var result = MessageBox.Show("Are you sure you want to exit?", "Confirmation", MessageBoxButton.YesNo);
+            var result = MessageBox.Show("Are you sure you want to exit?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Application.Current.Shutdown();
@@ -53,31 +53,42 @@ namespace MovieCatalog
 
         public void Import()
         {
-            Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
-            Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
-
-            if (Import.ShowDialog() == true)
+            try
             {
-                string impext = Path.GetExtension(Import.FileName);
+                Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
+                Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
 
-                if (impext.Equals(".xml"))
+                if (Import.ShowDialog() == true)
                 {
-                    XmlSerializer x = new XmlSerializer(typeof(ObservableCollection<Movie>));
+                    string impext = Path.GetExtension(Import.FileName);
 
-                    using (StreamReader reader = new StreamReader(Import.FileName))
+                    // Deserializer XMl
+
+                    if (impext.Equals(".xml"))
                     {
-                        Movies = (ObservableCollection<Movie>)x.Deserialize(reader);
+                        XmlSerializer x = new XmlSerializer(typeof(ObservableCollection<Movie>));
 
+                        using (StreamReader reader = new StreamReader(Import.FileName))
+                        {
+                            Movies = (ObservableCollection<Movie>)x.Deserialize(reader);
+                        }
+                    }
+
+                    //Deserializer JSON
+
+                    else if (impext.Equals(".json"))
+                    {
+                        string jsonimp = File.ReadAllText(Import.FileName);
+
+                        ObservableCollection<Movie> data = JsonConvert.DeserializeObject<ObservableCollection<Movie>>(jsonimp);
+                        Movies = data;
                     }
                 }
-                else if (impext.Equals(".json"))
-                {                   
-                    string jsonimp = File.ReadAllText(Import.FileName);
-                    ObservableCollection<Movie> data = JsonConvert.DeserializeObject<ObservableCollection<Movie>>(jsonimp);
-                    Movies = data;
-                }
             }
-
+            catch
+            {
+                MessageBox.Show("That file is invalid!" + Environment.NewLine + "Select a different file.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         //Export funkcija
@@ -128,12 +139,12 @@ namespace MovieCatalog
         {
             if (selectedMovie == null)
             {
-                MessageBox.Show("Nothing is selected", "Error!", MessageBoxButton.OK);
+                MessageBox.Show("Nothing is selected", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
                 var selectedMovie = this.selectedMovie;
-                var editDialog = new Edit(selectedMovie);
+                var editDialog = new AddEdit(selectedMovie);
 
                 if (editDialog.ShowDialog() == true)
                 {
@@ -145,11 +156,11 @@ namespace MovieCatalog
 
         public void Add()
         {
-            AddWindow addDialog = new AddWindow();
+            AddEdit addDialog = new AddEdit(null);
 
             if (addDialog.ShowDialog() == true)
             {
-                movies.Add(addDialog.AddMovie);
+                movies.Add(addDialog.Movie);
             }
         }
 
@@ -160,11 +171,11 @@ namespace MovieCatalog
             if
           (selectedMovie == null)
             {
-                MessageBox.Show("Nothing is selected", "Error", MessageBoxButton.OK);
+                MessageBox.Show("Nothing is selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
+                var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     movies.Remove((Movie)selectedMovie);
@@ -174,10 +185,14 @@ namespace MovieCatalog
 
         // Search funkcija
 
-        public void Search()
+        public void Search(string value)
         {
-            OnPropertyChanged("Movies");
+            if (value != null)
+            {
+                SearchValue = value;
+            }
         }
+
         public string SearchValue
         {
             get
@@ -206,14 +221,13 @@ namespace MovieCatalog
                     filteredMovies = new ObservableCollection<Movie>();
                     foreach (var movie in movies)
                     {
-                        if (movie.Name.StartsWith(text) || movie.Genre.ToString().StartsWith(text))
+                        if (movie.Name.StartsWith(text, System.StringComparison.InvariantCultureIgnoreCase)
+                            || movie.Genre.ToString().StartsWith(text, System.StringComparison.InvariantCultureIgnoreCase))
                         {
                             filteredMovies.Add(movie);
                         }
                     }
                     return filteredMovies;
-
-                    //dataGrid.ItemsSource = filteredMovies;
                 }
             }
 

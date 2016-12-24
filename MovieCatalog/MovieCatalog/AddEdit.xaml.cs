@@ -4,14 +4,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace MovieCatalog
 {
     /// <summary>
-    /// Interaction logic for Edit.xaml
+    /// Interaction logic for AddEdit.xaml
     /// </summary>
-    public partial class Edit : Window
+    public partial class AddEdit : Window
     {
 
         private Movie _movie;
@@ -28,32 +27,28 @@ namespace MovieCatalog
                 RaisePropertyChanged();
             }
         }
-        public Edit(Movie movie)
+
+        public AddEdit(Movie movie)
         {
             DataContext = this;
             _oldMovie = movie;
-            Movie = new Movie(movie);
-            InitializeComponent();
-        }
-        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // ... Get DatePicker reference.
-            var picker = sender as DatePicker;
 
-            DateTime? date = picker.SelectedDate;
-            // ... Get nullable DateTime from SelectedDate.
-            date = picker.SelectedDate;
-            if (!date.HasValue)
+            if (movie == null)
             {
-                // ... A null object.
-                this.Title = "No date";
+                // Add
+                this.Title = "Add movie";
+                Movie = new Movie();
             }
             else
             {
-                // ... No need to display the time.
-                this.Title = date.Value.ToShortDateString();
+                //edit
+                this.Title = "Edit movie";
+                Movie = new Movie(movie);
             }
+            InitializeComponent();
+            editDate.SelectedDate = null;
         }
+
         public List<MovieTypeEnum> Genres
         {
             get
@@ -61,8 +56,8 @@ namespace MovieCatalog
                 return Enum.GetValues(typeof(MovieTypeEnum)).Cast<MovieTypeEnum>().ToList<MovieTypeEnum>();
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(
             [CallerMemberName] string caller = "")
@@ -73,7 +68,6 @@ namespace MovieCatalog
             }
         }
 
-
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -81,10 +75,24 @@ namespace MovieCatalog
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            Movie.Genre = (MovieTypeEnum)comboBox.SelectedItem;
-            _oldMovie.CopyProperties(Movie);
-
-            this.DialogResult = true;
+            try
+            {
+                Movie.Genre = (MovieTypeEnum)comboBox.SelectedItem;
+                if (_oldMovie == null)
+                {
+                    //add
+                    this.DialogResult = true;
+                }
+                else
+                {
+                    //edit
+                    _oldMovie.CopyProperties(Movie);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("You must enter everything!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             this.Close();
         }
     }

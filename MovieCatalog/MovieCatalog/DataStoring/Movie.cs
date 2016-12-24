@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -12,9 +11,9 @@ namespace MovieCatalog
         Thriller,
         Scifi,
         Fantasy,
-        Western 
+        Western
     }
-    [Serializable]
+
     public class Movie : INotifyPropertyChanged
     {
         public Movie()
@@ -33,7 +32,7 @@ namespace MovieCatalog
             this.Genre = movie.Genre;
             this.ReleaseDate = movie.ReleaseDate;
         }
-        
+
         private string _Name;
         public string Name
         {
@@ -74,16 +73,6 @@ namespace MovieCatalog
                 _ReleaseDate = value;
                 OnPropertyChanged();
             }
-        }
-
-        public static ObservableCollection<Movie> getMovies()
-        {
-            var movie = new ObservableCollection<Movie>();
-            movie.Add(new Movie() { Name = "Avatar", Genre = MovieTypeEnum.Scifi, Director = "James Cameron", ReleaseDate = new DateTime(2001, 2, 12) });
-            movie.Add(new Movie() { Name = "Dark Knight", Genre = MovieTypeEnum.Fantasy, Director = "Christopher Nolan", ReleaseDate = new DateTime(2010, 3, 12) });
-            movie.Add(new Movie() { Name = "Gilmors girls", Genre = MovieTypeEnum.Action, Director = "Ivan Peric", ReleaseDate = new DateTime(2006, 5, 30) });
-            movie.Add(new Movie() { Name = "The Hatefull Eight", Genre = MovieTypeEnum.Western, Director = "Quentin Tarntino", ReleaseDate = new DateTime(2016, 3, 5) });
-            return movie;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
