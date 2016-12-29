@@ -5,20 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieCatalog"
         mc:Ignorable="d"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Height="300" Width="300" ResizeMode="NoResize">
+        Height="300" Width="260" ResizeMode="NoResize">
 
     <Grid>
 
-        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Height="23" Margin="207,238,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_Click"/>
+        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Height="23" Margin="157,238,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_Click"/>
 
-        <Button x:Name="okButton" Content="Ok" HorizontalAlignment="Left" Height="23" Margin="105,238,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.543,-1.709" Click="okButton_Click"/>
+        <Button x:Name="okButton" Content="Ok" HorizontalAlignment="Left" Height="23" Margin="67,238,0,0" VerticalAlignment="Top" Width="75" Click="okButton_Click"/>
 
         <TextBlock x:Name="textBlockName" HorizontalAlignment="Left" Height="23" Margin="10,21,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
 
         <TextBlock x:Name="textBlockGenre" HorizontalAlignment="Left" Height="23" Margin="10,55,0,0" TextWrapping="Wrap" Text="Genre" VerticalAlignment="Top"/>
 
-        <TextBlock x:Name="textBlockDirector" HorizontalAlignment="Left" Height="23" Margin="10,89,0,0" TextWrapping="Wrap" Text="Director" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="71"/>
+        <TextBlock x:Name="textBlockDirector" HorizontalAlignment="Left" Height="23" Margin="10,89,0,0" TextWrapping="Wrap" Text="Director" VerticalAlignment="Top" Width="71"/>
 
         <TextBlock x:Name="textBlockRelease" HorizontalAlignment="Left" Height="23" Margin="10,160,0,0" TextWrapping="Wrap" Text="Release Date" VerticalAlignment="Top"/>
 

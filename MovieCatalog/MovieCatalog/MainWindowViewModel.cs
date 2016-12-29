@@ -114,6 +114,7 @@ namespace MovieCatalog
                 string ext = Path.GetExtension(filename);
 
                 // Serializer
+
                 if (ext.Equals(".xml"))
                 {
 
@@ -221,8 +222,8 @@ namespace MovieCatalog
                     filteredMovies = new ObservableCollection<Movie>();
                     foreach (var movie in movies)
                     {
-                        if (movie.Name.StartsWith(text, System.StringComparison.InvariantCultureIgnoreCase)
-                            || movie.Genre.ToString().StartsWith(text, System.StringComparison.InvariantCultureIgnoreCase))
+                        if (movie.Name.StartsWith(text, StringComparison.InvariantCultureIgnoreCase)
+                            || movie.Genre.ToString().StartsWith(text, StringComparison.InvariantCultureIgnoreCase))
                         {
                             filteredMovies.Add(movie);
                         }
@@ -237,6 +238,8 @@ namespace MovieCatalog
                 OnPropertyChanged("Movies");
             }
         }
+
+        // Izabrani film
 
         public Movie SelectedMovie
         {

@@ -7,9 +7,6 @@ using System.Windows;
 
 namespace MovieCatalog
 {
-    /// <summary>
-    /// Interaction logic for AddEdit.xaml
-    /// </summary>
     public partial class AddEdit : Window
     {
 
@@ -36,17 +33,18 @@ namespace MovieCatalog
             if (movie == null)
             {
                 // Add
+
                 this.Title = "Add movie";
                 Movie = new Movie();
             }
             else
             {
-                //edit
+                // Edit
+
                 this.Title = "Edit movie";
                 Movie = new Movie(movie);
             }
             InitializeComponent();
-            editDate.SelectedDate = null;
         }
 
         public List<MovieTypeEnum> Genres
@@ -54,17 +52,6 @@ namespace MovieCatalog
             get
             {
                 return Enum.GetValues(typeof(MovieTypeEnum)).Cast<MovieTypeEnum>().ToList<MovieTypeEnum>();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(
-            [CallerMemberName] string caller = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(caller));
             }
         }
 
@@ -77,15 +64,16 @@ namespace MovieCatalog
         {
             try
             {
-                Movie.Genre = (MovieTypeEnum)comboBox.SelectedItem;
                 if (_oldMovie == null)
                 {
-                    //add
+                    // Add
+
                     this.DialogResult = true;
                 }
                 else
                 {
-                    //edit
+                    // Edit
+
                     _oldMovie.CopyProperties(Movie);
                 }
             }
@@ -94,6 +82,17 @@ namespace MovieCatalog
                 MessageBox.Show("You must enter everything!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             this.Close();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(
+            [CallerMemberName] string caller = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(caller));
+            }
         }
     }
 }
