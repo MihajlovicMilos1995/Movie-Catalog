@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Runtime.CompilerServices;
 
 namespace MovieCatalog
@@ -32,6 +34,8 @@ namespace MovieCatalog
             this.Genre = movie.Genre;
             this.ReleaseDate = movie.ReleaseDate;
         }
+        
+        public int MovieId { get; set; }
 
         private string _Name;
         public string Name
@@ -41,9 +45,9 @@ namespace MovieCatalog
             {
                 _Name = value;
                 OnPropertyChanged();
-
             }
         }
+
         private MovieTypeEnum _Genre;
         public MovieTypeEnum Genre
         {
@@ -54,6 +58,7 @@ namespace MovieCatalog
                 OnPropertyChanged();
             }
         }
+
         private string _Director;
         public string Director
         {
@@ -64,6 +69,7 @@ namespace MovieCatalog
                 OnPropertyChanged();
             }
         }
+
         private DateTime _ReleaseDate = DateTime.Now;
         public DateTime ReleaseDate
         {
@@ -75,6 +81,8 @@ namespace MovieCatalog
             }
         }
 
+        public virtual List<Movie> Movies { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string caller = "")
@@ -84,6 +92,6 @@ namespace MovieCatalog
                 PropertyChanged(this, new PropertyChangedEventArgs(caller));
             }
         }
-
     }
 }
+

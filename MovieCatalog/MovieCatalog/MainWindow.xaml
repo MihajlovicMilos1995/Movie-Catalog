@@ -27,16 +27,14 @@
         <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="70" Height="20" Command="{Binding SearchCommand}" Grid.Column="2"/>
 
         <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Grid.ColumnSpan="2" >
-            
+
             <TextBox.Text>
                 <Binding Path="SearchValue" 
              UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
         </TextBox>
 
-        <Button x:Name="Export" Content="Export" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,10" Command="{Binding ExportCommand}" Grid.Column="1" Grid.Row="3" Width="70" Height="20"/>
-
-        <Button x:Name="Import" Content="Import" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Command="{Binding ImportCommand}" Grid.Row="3" Width="70" Height="20"/>
+        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,10" Command="{Binding SaveCommand}" Grid.Column="4" Grid.Row="3" Width="70" Height="20"/>
 
         <Button x:Name="Add" Content="Add" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="70" Height="20" Margin="0,0,10,10" Grid.Column="3" Grid.Row="2" Command="{Binding AddCommand}"/>
 

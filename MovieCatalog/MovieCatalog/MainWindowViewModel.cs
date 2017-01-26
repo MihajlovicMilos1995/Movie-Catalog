@@ -1,12 +1,11 @@
 ﻿using Prism.Commands;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Serialization;
-using Newtonsoft.Json;
 using System;
+using System.Data.SqlClient;
+using System.Windows.Controls;
 
 namespace MovieCatalog
 {
@@ -14,13 +13,13 @@ namespace MovieCatalog
     {
         private ObservableCollection<Movie> movies = new ObservableCollection<Movie>();
         private ObservableCollection<Movie> filteredMovies = new ObservableCollection<Movie>();
+
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand ExitCommand { get; set; }
-        public ICommand ExportCommand { get; set; }
-        public ICommand ImportCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
         private Movie selectedMovie;
 
         private string searchValue;
@@ -33,8 +32,7 @@ namespace MovieCatalog
             AddCommand = new DelegateCommand(Add);
             EditCommand = new DelegateCommand(Edit);
             ExitCommand = new DelegateCommand(Exit);
-            ExportCommand = new DelegateCommand(Export);
-            ImportCommand = new DelegateCommand(Import);
+            SaveCommand = new DelegateCommand(Save);
         }
 
         // Exit funkcija
@@ -49,90 +47,49 @@ namespace MovieCatalog
             }
         }
 
-        //Import funkcija
+        //Save to DB funkcija
 
-        public void Import()
+        public void Save()
         {
-            try
-            {
-                Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
-                Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
-
-                if (Import.ShowDialog() == true)
-                {
-                    string impext = Path.GetExtension(Import.FileName);
-
-                    // Deserializer XMl
-
-                    if (impext.Equals(".xml"))
-                    {
-                        XmlSerializer x = new XmlSerializer(typeof(ObservableCollection<Movie>));
-
-                        using (StreamReader reader = new StreamReader(Import.FileName))
-                        {
-                            Movies = (ObservableCollection<Movie>)x.Deserialize(reader);
-                        }
-                    }
-
-                    //Deserializer JSON
-
-                    else if (impext.Equals(".json"))
-                    {
-                        string jsonimp = File.ReadAllText(Import.FileName);
-
-                        ObservableCollection<Movie> data = JsonConvert.DeserializeObject<ObservableCollection<Movie>>(jsonimp);
-                        Movies = data;
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("That file is invalid!" + Environment.NewLine + "Select a different file.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            
         }
 
-        //Export funkcija
+            //Microsoft.Win32.SaveFileDialog SaveFile = new Microsoft.Win32.SaveFileDialog();
+            //SaveFile.FileName = "Movies";
+            //SaveFile.DefaultExt = ".xml"; // Default file extension
+            //SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter by extension
 
-        public void Export()
-        {
+            //// Process save file dialog box results
 
-            Microsoft.Win32.SaveFileDialog SaveFile = new Microsoft.Win32.SaveFileDialog();
-            SaveFile.FileName = "Movies";
-            SaveFile.DefaultExt = ".xml"; // Default file extension
-            SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter by extension
+            //if (SaveFile.ShowDialog() == true)
+            //{
+            //// Save
 
-            // Process save file dialog box results
+            //string filename = SaveFile.FileName;
 
-            if (SaveFile.ShowDialog() == true)
-            {
-                // Save
+            //// izvlacenje extenzije (ubaci u if else)
 
-                string filename = SaveFile.FileName;
+            //string ext = Path.GetExtension(filename);
 
-                // izvlacenje extenzije (ubaci u if else)
+            //// Serializer
 
-                string ext = Path.GetExtension(filename);
+            //if (ext.Equals(".xml"))
+            //{
 
-                // Serializer
+            //XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Movie>));
 
-                if (ext.Equals(".xml"))
-                {
+            //using (FileStream writer = new FileStream(filename, FileMode.OpenOrCreate))
+            //{
+            //serializer.Serialize(writer, movies);
+            //}
+            //}
+            //else if (ext == ".json")
+            //{
+            //string json = JsonConvert.SerializeObject(movies, Formatting.Indented);
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Movie>));
-
-                    using (FileStream writer = new FileStream(filename, FileMode.OpenOrCreate))
-                    {
-                        serializer.Serialize(writer, movies);
-                    }
-                }
-                else if (ext == ".json")
-                {
-                    string json = JsonConvert.SerializeObject(movies, Formatting.Indented);
-
-                    File.WriteAllText(filename, json);
-                }
-            }
-        }
+            //File.WriteAllText(filename, json);
+            //}
+            //}
 
         // Edit funkcija
 
