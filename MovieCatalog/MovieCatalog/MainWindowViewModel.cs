@@ -4,13 +4,15 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System;
-using System.Data.SqlClient;
-using System.Windows.Controls;
+using System.Linq;
+
 
 namespace MovieCatalog
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        MovieContext ctx = new MovieContext();
+
         private ObservableCollection<Movie> movies = new ObservableCollection<Movie>();
         private ObservableCollection<Movie> filteredMovies = new ObservableCollection<Movie>();
 
@@ -24,7 +26,6 @@ namespace MovieCatalog
 
         private string searchValue;
 
-
         public MainWindowViewModel()
         {
             SearchCommand = new DelegateCommand<string>(Search);
@@ -33,7 +34,15 @@ namespace MovieCatalog
             EditCommand = new DelegateCommand(Edit);
             ExitCommand = new DelegateCommand(Exit);
             SaveCommand = new DelegateCommand(Save);
+
+            var filmici = ctx.Movies.ToList();
+            foreach (var film in filmici)
+            {
+                Movies.Add(film);
+            }
         }
+
+
 
         // Exit funkcija
 
@@ -51,45 +60,9 @@ namespace MovieCatalog
 
         public void Save()
         {
-            
+            ctx.SaveChanges();
+            MessageBox.Show("Movies are saved", "Saving", MessageBoxButton.OK);
         }
-
-            //Microsoft.Win32.SaveFileDialog SaveFile = new Microsoft.Win32.SaveFileDialog();
-            //SaveFile.FileName = "Movies";
-            //SaveFile.DefaultExt = ".xml"; // Default file extension
-            //SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter by extension
-
-            //// Process save file dialog box results
-
-            //if (SaveFile.ShowDialog() == true)
-            //{
-            //// Save
-
-            //string filename = SaveFile.FileName;
-
-            //// izvlacenje extenzije (ubaci u if else)
-
-            //string ext = Path.GetExtension(filename);
-
-            //// Serializer
-
-            //if (ext.Equals(".xml"))
-            //{
-
-            //XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Movie>));
-
-            //using (FileStream writer = new FileStream(filename, FileMode.OpenOrCreate))
-            //{
-            //serializer.Serialize(writer, movies);
-            //}
-            //}
-            //else if (ext == ".json")
-            //{
-            //string json = JsonConvert.SerializeObject(movies, Formatting.Indented);
-
-            //File.WriteAllText(filename, json);
-            //}
-            //}
 
         // Edit funkcija
 
@@ -108,6 +81,7 @@ namespace MovieCatalog
                 {
                 }
             }
+            ctx.SaveChanges();
         }
 
         // Add funkcija
@@ -119,6 +93,7 @@ namespace MovieCatalog
             if (addDialog.ShowDialog() == true)
             {
                 movies.Add(addDialog.Movie);
+                ctx.Movies.Add(addDialog.Movie);
             }
         }
 
@@ -136,9 +111,11 @@ namespace MovieCatalog
                 var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    movies.Remove((Movie)selectedMovie);
+                    ctx.Movies.Remove(selectedMovie);
+                    movies.Remove(selectedMovie);
                 }
             }
+            ctx.SaveChanges();
         }
 
         // Search funkcija

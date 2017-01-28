@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.Entity;
 using System.Runtime.CompilerServices;
 
 namespace MovieCatalog
@@ -34,7 +33,7 @@ namespace MovieCatalog
             this.Genre = movie.Genre;
             this.ReleaseDate = movie.ReleaseDate;
         }
-        
+
         public int MovieId { get; set; }
 
         private string _Name;
